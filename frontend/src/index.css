@@ -21,7 +21,8 @@ body {
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 20px;
 }
 
 .container {
@@ -130,5 +131,26 @@ button:hover {
 
 .expense-amt {
   color: red;
+  font-weight: bold;
+}
+
+.dashboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.chart-card {
+  flex: 2;
+}
+
+.insight-card {
+  flex: 1;
+}
+
+.UserDets {
+  font-size: 30px;
   font-weight: bold;
 }

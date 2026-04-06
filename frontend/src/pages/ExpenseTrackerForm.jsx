@@ -7,9 +7,9 @@ import { handleError } from '../util';
 function ExpenseTrackerForm({addExpenses}) {
 
     const [expensesInfo, setExepensesInfo] = useState({
-        text: '', amount:''
+        text: '', amount:'', category: 'Food' 
     });
- const navigate = useNavigate();
+    
 
 
   const handleChange = (e) => {
@@ -26,13 +26,13 @@ function ExpenseTrackerForm({addExpenses}) {
 
     e.preventDefault();
     console.log(expensesInfo);
-    const{text , amount} = expensesInfo;
-    if(!text || !amount){
+    const{text , amount, category} = expensesInfo;
+    if(!text || !amount ||!category){
         handleError('all fields are required');
         return;
     }
     setTimeout(()=>{
-        setExepensesInfo({text: '', amount: ''})
+        setExepensesInfo({text: '', amount: '', category: 'Food'})
     }, 1000);
     addExpenses(expensesInfo);
 
@@ -62,6 +62,19 @@ function ExpenseTrackerForm({addExpenses}) {
          placeholder='Enter your amount..'
          value={expensesInfo.amount}
          />
+        </div>
+        <div>
+          <label htmlFor='category'>Category</label>
+         <select
+            name="category"
+            value={expensesInfo.category}
+            onChange={handleChange}>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Salary">Salary</option>
+            <option value="Other">Other</option>
+                  </select> 
         </div>
          <button type='submit'>Add Expense</button>
          

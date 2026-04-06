@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
+        
+        category: {
+        type: String,
+        default: "Other"
+        },
 
         createdAt: {
             type: Date,

@@ -6,6 +6,8 @@ import {ToastContainer} from 'react-toastify'
 import ExpensesTable from './ExpensesTable';
 import ExpenseTrackerForm from './ExpenseTrackerForm';
 import ExpenseDetails from './ExpenseDetails';
+import ExpenseChart from './ExpenseChart';
+import ExpenseInsights from './ExpenseInsights';
 
 
 
@@ -25,18 +27,24 @@ function Home() {
   }, []);
 
 
-  useEffect(()=>{
-    const amounts = expenses.map((item) => item.amount);
-    console.log(amounts);
-    const income = amounts.filter(item => item>0).reduce((acc, item) => (acc += item), 0);
-    console.log('income :' , income );
-    const exp = amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) * -1 ;
-    console.log('exp :' , exp );
+ useEffect(()=>{
 
-    setIncomeAmt(income); 
-    setExpenseAmt(exp);
+  if(!expenses || expenses.length === 0) return;
 
-  }, [expenses]);
+  const amounts = expenses.map((item) => item.amount);
+
+  const income = amounts
+    .filter(item => item > 0)
+    .reduce((acc, item) => acc + item, 0);
+
+  const exp = amounts
+    .filter(item => item < 0)
+    .reduce((acc, item) => acc + item, 0) * -1;
+
+  setIncomeAmt(income); 
+  setExpenseAmt(exp);
+
+}, [expenses]);
 
   const handleLogout = () => {
     localStorage.removeItem('JWTtoken');
@@ -138,15 +146,26 @@ function Home() {
 
     <div>
       <div className='user-section'>
-         <div>Welcome, {loggedInUser}</div>
+         <div className='UserDets'>Welcome, {loggedInUser}</div>
          <button onClick={handleLogout}>Logout</button>
      </div>
+
+      
       <ExpenseDetails incomeAmt = {incomeAmt} expenseAmt = {expenseAmt}/>
+       
       <ExpenseTrackerForm addExpenses={addExpenses}/>
      <ExpensesTable 
      expenses={expenses} handleDeleteEx={handleDeleteEx}/>
       
-      
+      <div className="dashboard-row">
+  <div className="chart-card">
+    <ExpenseChart expenses={expenses}/>
+  </div>
+
+  <div className="insight-card">
+    <ExpenseInsights expenses={expenses}/>
+  </div>
+</div>
       
       <ToastContainer />
     </div>
