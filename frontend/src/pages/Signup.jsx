@@ -5,7 +5,7 @@ import { handleError, handleSuccess } from '../util'
 
 function Signup() {
 
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const [signupInfo , setSignupInfo] = useState({
     name: '',
     email: '',
@@ -39,7 +39,7 @@ function Signup() {
     }
 
     try {
-      const url = "http://localhost:3000/auth/signup"
+      const url = `${API_URL}auth/signup`
       const res =  await fetch(url, {
         method: "POST",
         headers: {

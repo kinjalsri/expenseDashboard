@@ -11,12 +11,15 @@ import ExpenseInsights from './ExpenseInsights';
 
 
 
+
 function Home() {
 
   const [loggedInUser, setLoggedInUser] = useState('');
   const [expenses, setExpenses] = useState([]);
   const [expenseAmt, setExpenseAmt] = useState(0);
   const [incomeAmt, setIncomeAmt] = useState(0);
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log(import.meta.env.VITE_API_URL);
 
   
   const navigate = useNavigate();
@@ -59,7 +62,7 @@ function Home() {
  const fetchExpenses = async () => {
   try {
 
-    const url = "http://localhost:3000/expenses";
+    const url = `${API_URL}expenses`;
     const headers = {
       headers: {
         'Authorization' : localStorage.getItem('JWTtoken')
@@ -86,7 +89,7 @@ function Home() {
   const addExpenses = async (data) => {
   try {
 
-    const url = `http://localhost:3000/expenses`;
+    const url = `${API_URL}expenses`;
     const headers = {
       headers: {
         'Authorization' : localStorage.getItem('JWTtoken'),
@@ -115,7 +118,7 @@ function Home() {
  const handleDeleteEx = async (expenseId)=> {
  try {
 
-    const url =`http://localhost:3000/expenses/${expenseId}`;
+    const url =`${API_URL}expenses/${expenseId}`;
     const headers = {
       headers: {
         'Authorization' : localStorage.getItem('JWTtoken'),

@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import {ToastContainer} from 'react-toastify'
 import { handleError, handleSuccess } from '../util'
 
+
 function Login() {
 
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const [loginInfo , setLoginInfo] = useState({
     email: '',
     password: ''
@@ -37,7 +38,7 @@ function Login() {
     }
 
     try {
-      const url = "http://localhost:3000/auth/login"
+      const url = `${API_URL}auth/login`
       const res =  await fetch(url, {
         method: "POST",
         headers: {
